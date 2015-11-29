@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Repo": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "push": {
+    "dataSource": "push",
+    "public": false
+  },
+  "application": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "notification": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "installation": {
+    "dataSource": "mongodb",
+    "public": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "installation",
+  "base": "Installation",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "repos": {
+      "type": "hasAndBelongsToMany",
+      "model": "Repo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

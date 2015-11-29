@@ -1,0 +1,25 @@
+{
+  "name": "gitmonitor-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "./node_modules/nodemon/bin/nodemon.js --verbose --watch app --ignore 'node_modules/*' --ignore '.git/*' --exec 'npm run kill && npm run runner' || true",
+    "runner": "docker  --tlsverify=false exec $(docker-compose ps -q web) node /src/app/ || true",
+    "up": "docker-compose up",
+    "run": "docker --tlsverify=false exec $(docker-compose ps -q web) node",
+    "build": "docker-compose build",
+    "logs": "docker-compose logs",
+    "test": "docker --tlsverify=false exec -it $(docker-compose -f docker-compose-dev-local.yml ps -q web) /src/app/node_modules/mocha/bin/mocha -c --bail -r /src/app/test.js /src/app/test || true",
+    "test-single": "docker --tlsverify=false exec -it $(docker-compose -f docker-compose-dev-local.yml ps -q web) /src/app/node_modules/mocha/bin/mocha -c --bail -r /src/app/test.js",
+    "kill": "docker  --tlsverify=false exec $(docker-compose ps -q web) pkill -f 'node /src/app/' || true",
+    "killall": "docker  --tlsverify=false rm -f $(docker-compose ps -q)",
+    "install": "docker  --tlsverify=false exec -it $(docker-compose ps -q web) npm install --prefix /src/app/",
+    "install-package": "docker  --tlsverify=false exec -it $(docker-compose ps -q web) npm install --prefix /src/app/ --save"
+  },
+  "author": "Manuel Villing <hi@manuelvilling.de>",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^1.8.1"
+  }
+}

@@ -1,0 +1,5 @@
+node_modules
+.DS_Store
+app/server/secrets/cert.pem
+app/server/secrets/key.pem
+npm-debug.log

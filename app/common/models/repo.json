@@ -1,0 +1,59 @@
+{
+  "name": "Repo",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "generated": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "updateTime": {
+      "type": "date",
+      "required": true
+    },
+    "branch": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string",
+      "required": true
+    },
+    "message": {
+      "type": "string",
+      "required": true
+    },
+    "isClean": {
+      "type": "boolean",
+      "required": true
+    },
+    "branches": {
+      "type": [
+        "string"
+      ],
+      "required": true
+    },
+    "status": {
+      "type": "object",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "installations": {
+      "type": "hasAndBelongsToMany",
+      "model": "installation",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

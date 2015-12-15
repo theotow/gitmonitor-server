@@ -5,7 +5,7 @@ exports.appName = 'gitmonitorApp';
 exports.id = 'loopback-component-push-app2';
 
 exports.apnsCertData = readCredentialsFile('cert.pem');
-exports.apnsKeyData =readCredentialsFile('key.pem');
+exports.apnsKeyData = readCredentialsFile('key.pem');
 
 
 //--- Helper functions ---

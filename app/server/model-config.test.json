@@ -14,27 +14,27 @@
     ]
   },
   "User": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "AccessToken": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "ACL": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "Role": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "Repo": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": true
   },
   "push": {
@@ -42,15 +42,15 @@
     "public": false
   },
   "application": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "notification": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": false
   },
   "installation": {
-    "dataSource": "mongodb",
+    "dataSource": "db",
     "public": true
   }
 }

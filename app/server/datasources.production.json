@@ -1,0 +1,20 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongodb": {
+    "host": "mongo",
+    "port": 27017,
+    "database": "prodDB",
+    "name": "mongodb",
+    "connector": "mongodb"
+  },
+  "push": {
+    "name": "push",
+    "connector": "loopback-component-push",
+    "installation": "installation",
+    "notification": "notification",
+    "application": "application"
+  }
+}

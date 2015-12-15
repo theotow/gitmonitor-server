@@ -9,6 +9,7 @@ web:
     - "3000"
   ports:
     - "3000:3000"
+  command: forever /src/app/server/server.js
   links:
     - mongo:mongo
 

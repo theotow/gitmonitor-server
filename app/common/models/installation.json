@@ -11,7 +11,7 @@
     "repos": {
       "type": "hasAndBelongsToMany",
       "model": "Repo",
-      "foreignKey": ""
+      "foreignKey": "id"
     }
   },
   "acls": [],

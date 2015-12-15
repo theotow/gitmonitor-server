@@ -19,6 +19,10 @@
       "type": "date",
       "required": true
     },
+    "notified": {
+      "type": "boolean",
+      "required": true
+    },
     "branch": {
       "type": "string",
       "required": true

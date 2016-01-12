@@ -9,9 +9,10 @@
   "validations": [],
   "relations": {
     "repos": {
-      "type": "hasAndBelongsToMany",
+      "type": "hasMany",
       "model": "Repo",
-      "foreignKey": "id"
+      "foreignKey": "installationId",
+      "through": "repoInstallation"
     }
   },
   "acls": [],

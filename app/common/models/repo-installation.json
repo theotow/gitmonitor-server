@@ -1,0 +1,33 @@
+{
+  "name": "repoInstallation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "repoId": {
+      "type": "string",
+      "required": true
+    },
+    "installationId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "repo": {
+      "type": "belongsTo",
+      "model": "Repo",
+      "foreignKey": ""
+    },
+    "installation": {
+      "type": "belongsTo",
+      "model": "installation",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

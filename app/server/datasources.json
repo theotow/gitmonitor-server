@@ -3,13 +3,6 @@
     "name": "db",
     "connector": "memory"
   },
-  "mongodb": {
-    "host": "mongo",
-    "port": 27017,
-    "database": "devDB",
-    "name": "mongodb",
-    "connector": "mongodb"
-  },
   "push": {
     "name": "push",
     "connector": "loopback-component-push",

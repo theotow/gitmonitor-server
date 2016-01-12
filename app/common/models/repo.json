@@ -53,9 +53,10 @@
   "validations": [],
   "relations": {
     "installations": {
-      "type": "hasAndBelongsToMany",
+      "type": "hasMany",
       "model": "installation",
-      "foreignKey": ""
+      "foreignKey": "repoId",
+      "through": "repoInstallation"
     }
   },
   "acls": [],

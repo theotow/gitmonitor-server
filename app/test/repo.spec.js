@@ -38,7 +38,7 @@ describe('Repo', function() {
 		});
 	});
 
-	it.only('repo should disappear from user repos when deleted', function(done) {
+	it('repo should disappear from user repos when deleted', function(done) {
 		this.timeout(5000);
 
 		async.waterfall([

@@ -7,7 +7,7 @@ exports.id = 'loopback-component-push-app2';
 exports.apnsCertData = readCredentialsFile('cert.pem');
 exports.apnsKeyData = readCredentialsFile('key.pem');
 
-exports.notifyAfterSeconds = 60 * 5;
+exports.notifyAfterSeconds = 5;
 
 
 //--- Helper functions ---

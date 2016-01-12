@@ -1,6 +1,6 @@
 'use strict';
 
-process.env.ENV = 'test';
+process.env.NODE_ENV = 'test';
 global.expect = require('expect.js');
 global.request = require('supertest');
 global.async = require('async');
@@ -53,6 +53,19 @@ global.common = {
       "deviceType": "ios"
     },
     repoData: {
+      branch: 'refs/heads/master',
+      name: 'testdir4',
+      author: 'Scott Chacon <schacon@gmail.com>',
+      message: 'test',
+      isClean: false,
+      notified: false,
+      branches: ['refs/heads/master'],
+      status: {
+        ahead: 0,
+        behind: 0
+      }
+    },
+    repoData3: {
       branch: 'refs/heads/master',
       name: 'testdir4',
       author: 'Scott Chacon <schacon@gmail.com>',

@@ -1,11 +1,14 @@
-1. dev env
-  docker compose builds dockerfiles
-  docker compose references local folders
-  docker compose overwrites default command
+# gitmonitor-server
 
-2. prod env
-  docker compose just builds and runs
+## purpose
 
+## how to install
 
-3. rules
-  docker files contains prod config , docker compose overwrites
+## depended repos
+
+* gitmonitor-client
+* gitmonitor-ios
+
+## licence
+
+MIT

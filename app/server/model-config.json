@@ -34,7 +34,7 @@
     "public": false
   },
   "Repo": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "push": {
@@ -42,19 +42,19 @@
     "public": false
   },
   "application": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "notification": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "installation": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "repoInstallation": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   }
 }

@@ -4,13 +4,14 @@ web:
     ENV: dev
   build: docker/app
   volumes:
-    - "app:/src/app"
+    - "./app:/src/app"
   expose:
     - "3000"
   ports:
     - "3000:3000"
   links:
     - mongo:mongo
+  command: forever /src/app/server/server.js
 
 mongo:
   restart: always

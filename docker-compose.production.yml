@@ -1,10 +1,11 @@
 web:
   restart: always
+  container_name: gitmonitor-web
   environment:
     ENV: production
   build: docker/app
   volumes:
-    - "app:/src/app"
+    - "/Users/manuel/Dropbox/Synced/PHP/gitmonitor-server/app:/src/app"
   expose:
     - "3000"
   ports:
@@ -15,9 +16,10 @@ web:
 
 mongo:
   restart: always
+  container_name: gitmonitor-mongo
   environment:
     ENV: production
-  image: mongo:3.0
+  build: docker/mongo
   volumes:
     - "/mongo-dev:/data/db"
   expose:

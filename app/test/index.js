@@ -16,12 +16,28 @@ global.common = {
         .send(obj)
         .end((err) => cb(err, http));
     },
+    installDevices(array, cb) {
+        var funcArray = [];
+        array.forEach(function(device){
+          funcArray.push((cb) => global.common.installDevice(device, cb))
+        });
+        async.series(funcArray, cb);
+      },
     createRepo(obj, cb) {
       var http = request(app)
         .post('/api/Repos/')
         .set('Accept', 'application/json')
         .send(obj)
         .end((err) => cb(err, http));
+    },
+    createRepos(array, cb){
+      var funcArray = [];
+      array.forEach(function(repo){
+        funcArray.push(function(cb){
+          global.common.createRepo(repo, cb)
+        })
+      });
+      async.series(funcArray, cb);
     },
     deleteRepo(id, cb) {
       var http = request(app)
@@ -42,6 +58,13 @@ global.common = {
         .set('Accept', 'application/json')
         .end((err) => cb(err, http));
     },
+    linkX(rId, array, cb){
+      var funcArray = [];
+      array.forEach(function(device){
+        funcArray.push((cb) => global.common.link(rId, device.res.body.id, cb))
+      });
+      async.series(funcArray, cb);
+    },
     list(iId, cb){
       var http = request(app)
         .get('/api/installations/'+ iId +'/repos')
@@ -50,6 +73,10 @@ global.common = {
     },
     device: {
       "deviceToken": "8ec3bba7de23cda5e8a2726c081be79204faede67529e617b625c984d61cf5c1",
+      "deviceType": "ios"
+    },
+    device2: {
+      "deviceToken": "8ec3bba7de23cda5e8a2726c081be79204faede67529e617b625c984d61cf5c2",
       "deviceType": "ios"
     },
     repoData: {
@@ -67,10 +94,10 @@ global.common = {
     },
     repoData3: {
       branch: 'refs/heads/master',
-      name: 'testdir4',
+      name: 'testdir5',
       author: 'Scott Chacon <schacon@gmail.com>',
       message: 'test',
-      isClean: false,
+      isClean: true,
       notified: false,
       branches: ['refs/heads/master'],
       status: {

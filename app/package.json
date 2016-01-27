@@ -19,6 +19,7 @@
     "loopback-datasource-juggler": "^2.39.0",
     "loopback-testing": "^1.2.0",
     "mocha": "^2.3.4",
+    "moment": "^2.11.1",
     "nodemon": "^1.8.1",
     "serve-favicon": "^2.0.1"
   },

@@ -1,6 +1,7 @@
 var models = require('./server').models;
 var config = require('./config');
 var async = require('async');
+var _ = require('lodash');
 var moment = require('moment');
 
 // get repos which are not synced

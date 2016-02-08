@@ -1,7 +1,7 @@
 web:
   restart: always
   environment:
-    ENV: dev
+    NODE_ENV: development
   build: docker/app
   volumes:
     - "./app:/src/app"
@@ -11,17 +11,13 @@ web:
     - "3000:3000"
   links:
     - mongo:mongo
-  command: forever /src/app/server/server.js
+  command: tail -f /dev/null
 
 mongo:
   restart: always
-  environment:
-    ENV: dev
-  image: mongo:3.0
+  build: docker/mongo
   volumes:
     - "/mongo-dev:/data/db"
   expose:
     - "27017"
-  ports:
-    - "127.0.0.1:27017:27017"
   command: mongod --noprealloc --smallfiles

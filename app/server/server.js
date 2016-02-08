@@ -2,6 +2,7 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
+console.log('Using ENV:' + app.get('env'));
 
 app.start = function() {
   // start the web server
@@ -22,6 +23,12 @@ boot(app, __dirname, function(err) {
   if (err) throw err;
 
   require('./push')(app);
+  
+
+  // some static data for testing
+  if(app.get('env') !== 'test'){
+    require('./dummydata')(app);
+  }
 
   // start the server if `$ node server.js`
   if (require.main === module)

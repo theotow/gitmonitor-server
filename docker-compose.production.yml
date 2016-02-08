@@ -2,10 +2,10 @@ web:
   restart: always
   container_name: gitmonitor-web
   environment:
-    ENV: production
+    NODE_ENV: production
   build: docker/app
   volumes:
-    - "/Users/manuel/Dropbox/Synced/PHP/gitmonitor-server/app:/src/app"
+    - "./app:/src/app"
   expose:
     - "3000"
   ports:
@@ -17,13 +17,9 @@ web:
 mongo:
   restart: always
   container_name: gitmonitor-mongo
-  environment:
-    ENV: production
   build: docker/mongo
   volumes:
     - "/mongo-dev:/data/db"
   expose:
     - "27017"
-  ports:
-    - "127.0.0.1:27017:27017"
   command: mongod --noprealloc --smallfiles

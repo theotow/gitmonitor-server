@@ -34,9 +34,6 @@ module.exports = function(app) {
 
     //--- Helper functions ---
     function updateOrCreateApp(cb) {
-      Application.find({}, function(err, data){
-        console.log(data);
-      })
       Application.findOne({
           where: {
             id: gitmonitorApp.id

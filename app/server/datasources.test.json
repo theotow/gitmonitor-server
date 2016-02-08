@@ -3,6 +3,10 @@
     "name": "db",
     "connector": "memory"
   },
+  "mongodb": {
+    "name": "db1",
+    "connector": "memory"
+  },
   "push": {
     "name": "push",
     "connector": "loopback-component-push",

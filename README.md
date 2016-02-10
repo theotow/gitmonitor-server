@@ -8,11 +8,27 @@ PS: currently it just reports if your repo is not committed, if it is pushed is 
 
 ## how to install
 
+read 'depends on' first
+```
+	npm install
+	npm run install
+```
+Terminal1:
+```
+	npm run up
+```
+
+Terminal2:
+```
+	npm run watch
+```
+
 ## depends on
 
-* gitmonitor-client
-* gitmonitor-ios
+* [gitmonitor-client](https://github.com/theotow/gitmonitor-client)
+* [gitmonitor-ios](https://github.com/theotow/gitmonitor-ios)
 * docker
+* node
 * docker-compose
 * cert.pem and key.pem in app/server/secrets/ please obtain them from apple developer console
 
@@ -33,6 +49,9 @@ npm run *
 * up-prod / runs the production build
 * build / build the dev build
 * build-prod / build the prod build
+
+
+Tested on Mac OSX 10.10.5 & node 4.2.2 & docker 1.10.0 & docker-compose 1.6.0
 
 ## licence
 

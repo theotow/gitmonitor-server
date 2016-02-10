@@ -1,7 +1,7 @@
 {
   "name": "gitmonitor-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "## purpose",
   "main": "index.js",
   "scripts": {
     "watch": "./node_modules/nodemon/bin/nodemon.js --verbose --watch app --ignore 'node_modules/*' --ignore '.git/*' --exec 'npm run kill && npm run runner' || true",
@@ -24,5 +24,17 @@
   "dependencies": {},
   "devDependencies": {
     "nodemon": "^1.8.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theotow/gitmonitor-server.git"
+  },
+  "keywords": [
+    "gitmonitor-server",
+    "server"
+  ],
+  "bugs": {
+    "url": "https://github.com/theotow/gitmonitor-server/issues"
+  },
+  "homepage": "https://github.com/theotow/gitmonitor-server#readme"
 }

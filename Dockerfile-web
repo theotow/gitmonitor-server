@@ -1,0 +1,27 @@
+FROM node:4.2
+
+RUN apt-get update && apt-get install -y \
+cron \
+nano \
+screen \
+python-setuptools \
+python-dev build-essential \
+supervisor
+RUN easy_install pip
+
+RUN mkdir /src
+RUN npm install nodemon forever -g
+RUN echo "Asia/Shanghai" | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
+COPY app /src/app
+
+# to run 2 scripts
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Add crontab file in the cron directory
+ADD docker/crontab /etc/cron.d/gitmonitor-cron
+
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/gitmonitor-cron
+
+ENV NODE_ENV production
+CMD /usr/bin/supervisord

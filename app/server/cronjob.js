@@ -1,12 +1,20 @@
 #!/usr/bin/env node
 var job = require('./job');
 var config = require('./config');
+var app = require('./server');
 var async = require('async');
 var q = async.queue(worker, 2);
+q.pause();
 if(!module.parent){
   populate(new Date(), config.notifyAfterSeconds * 1000, q, () => {
-    console.log('filled queue');
+    var length = q.length();
+    if(length === 0){
+      return finish();
+    }
+    q.resume();
+    console.log('filled queue', length);
   });
+  q.drain = finish;
 }
 
 function populate(time, maxtime, queue, cb){
@@ -27,11 +35,11 @@ function populate(time, maxtime, queue, cb){
               installation: installation,
               repo: repo
             });
-          });
-          // set repo notified
-          app.loopback.getModel('Repo').findOne({id: repo.id}, function(err, repo){
-            repo.updateAttributes({notified: true},function(err, data){
-            });
+
+						// set repo notified
+	          app.loopback.getModel('Repo').findById(repo.id, function(err, repo){
+	            repo.updateAttributes({notified: true},function(err, data){});
+	          });
           });
       });
       cb();
@@ -39,8 +47,15 @@ function populate(time, maxtime, queue, cb){
   });
 }
 
+// kill
+function finish(){
+  console.log('finished');
+  process.exit(0);
+}
+
 // process notifications
 function worker(task, cb){
+	console.log('nofity', task.installation, task.notification)
   job.sendNotification(task.installation, task.notification, cb);
 }
 

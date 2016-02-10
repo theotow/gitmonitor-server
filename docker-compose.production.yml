@@ -1,25 +1,26 @@
-web:
-  restart: always
-  container_name: gitmonitor-web
-  environment:
-    NODE_ENV: production
-  build: docker/app
-  volumes:
-    - "./app:/src/app"
-  expose:
-    - "3000"
-  ports:
-    - "3000:3000"
-  command: forever /src/app/server/server.js
-  links:
-    - mongo:mongo
+version: "2"
+services:
+  web:
+    restart: always
+    environment:
+      NODE_ENV: production
+    build:
+      context: .
+      dockerfile: ./Dockerfile-web
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    links:
+      - mongo:mongo
 
-mongo:
-  restart: always
-  container_name: gitmonitor-mongo
-  build: docker/mongo
-  volumes:
-    - "/mongo-dev:/data/db"
-  expose:
-    - "27017"
-  command: mongod --noprealloc --smallfiles
+  mongo:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile-mongo
+    volumes:
+      - "/mongo-dev:/data/db"
+    expose:
+      - "27017"
+    command: mongod --noprealloc --smallfiles

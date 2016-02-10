@@ -2,8 +2,7 @@ SHELL=/bin/bash
 DOCKER=/usr/local/bin/docker
 
 # Configurable variables
-DIST=./docker
-DOCKER-FILE=Dockerfile
+DIST=.
 DOCKER-REGISTRY=tutum.co/theotow
 
 DOCKER-REPO-SERVER=gitmonitor-server
@@ -11,8 +10,8 @@ DOCKER-REPO-DB=gitmonitor-mongo
 
 
 build:
-	$(DOCKER) build -t=$(DOCKER-REPO-SERVER) -f=docker/app/Dockerfile $(DIST)
-	$(DOCKER) build -t=$(DOCKER-REPO-DB) -f=docker/mongo/Dockerfile $(DIST)
+	$(DOCKER) build -t=$(DOCKER-REPO-SERVER) -f=Dockerfile-web $(DIST)
+	$(DOCKER) build -t=$(DOCKER-REPO-DB) -f=Dockerfile-mongo $(DIST)
 
 
 push:

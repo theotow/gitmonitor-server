@@ -23,7 +23,6 @@ boot(app, __dirname, function(err) {
   if (err) throw err;
 
   require('./push')(app);
-  
 
   // some static data for testing
   if(app.get('env') !== 'test'){

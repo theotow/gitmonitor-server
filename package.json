@@ -8,6 +8,8 @@
     "watch-local": "./node_modules/nodemon/bin/nodemon.js --verbose --watch app --ignore 'node_modules/*' --ignore '.git/*' --exec 'npm run test-local' || true",
     "runner": "docker exec $(docker-compose ps -q web) node /src/app/ || true",
     "up": "docker-compose up",
+    "build": "docker-compose build",
+    "build-prod": "docker-compose -f docker-compose.production.yml build",
     "up-prod": "docker-compose -f docker-compose.production.yml up",
     "run": "docker exec $(docker-compose ps -q web) node",
     "test": "docker exec -it $(docker-compose ps -q web) /src/app/node_modules/mocha/bin/mocha --compilers js:babel-core/register --bail -r /src/app/test/index.js /src/app/test/*.spec.js || true",

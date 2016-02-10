@@ -1,0 +1,2 @@
+* * * * * root NODE_ENV="production" /usr/local/bin/node /src/app/server/cronjob.js >> /var/log/lastlog 2>&1
+# An empty line is required at the end of this file for a valid cron file.

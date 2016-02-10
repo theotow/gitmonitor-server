@@ -1,23 +1,27 @@
-web:
-  restart: always
-  environment:
-    NODE_ENV: development
-  build: docker/app
-  volumes:
-    - "./app:/src/app"
-  expose:
-    - "3000"
-  ports:
-    - "3000:3000"
-  links:
-    - mongo:mongo
-  command: tail -f /dev/null
+version: "2"
+services:
+  web:
+    environment:
+      NODE_ENV: development
+    build:
+      context: .
+      dockerfile: ./Dockerfile-web
+    volumes:
+      - "./app:/src/app"
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    links:
+      - mongo:mongo
+    command: tail -f /dev/null
 
-mongo:
-  restart: always
-  build: docker/mongo
-  volumes:
-    - "/mongo-dev:/data/db"
-  expose:
-    - "27017"
-  command: mongod --noprealloc --smallfiles
+  mongo:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-mongo
+    volumes:
+      - "/mongo-dev:/data/db"
+    expose:
+      - "27017"
+    command: mongod --noprealloc --smallfiles

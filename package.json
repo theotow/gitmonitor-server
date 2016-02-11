@@ -1,6 +1,6 @@
 {
   "name": "gitmonitor-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "## purpose",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "killall": "docker rm -f $(docker-compose ps -q)",
     "install": "docker exec -it $(docker-compose ps -q web) npm install --prefix /src/app/",
     "install-package": "docker exec -it $(docker-compose ps -q web) npm install --prefix /src/app/ --save",
-		"patch-release": "npm version patch && git push --follow-tags"
+    "patch-release": "npm version patch && git push --follow-tags"
   },
   "author": "Manuel Villing <hi@manuelvilling.de>",
   "license": "MIT",

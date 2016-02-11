@@ -1,4 +1,5 @@
 # gitmonitor-server
+[![Build Status](https://travis-ci.org/theotow/gitmonitor-server.svg?branch=master)](https://travis-ci.org/theotow/gitmonitor-server)
 
 ## purpose
 
@@ -10,6 +11,7 @@ PS: currently it just reports if your repo is not committed, if it is pushed is 
 
 read 'depends on' first
 ```
+	add cert.pem and key.pem in app/server/secrets/ please obtain them from apple developer console
 	npm install
 	npm run install
 ```
@@ -30,7 +32,6 @@ Terminal2:
 * docker
 * node
 * docker-compose
-* cert.pem and key.pem in app/server/secrets/ please obtain them from apple developer console
 
 ## commands
 

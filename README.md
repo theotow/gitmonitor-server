@@ -11,10 +11,14 @@ PS: currently it just reports if your repo is not committed, if it is pushed is 
 
 read 'depends on' first
 ```
+	git clone https://github.com/theotow/gitmonitor-server
 	add cert.pem and key.pem in app/server/secrets/ please obtain them from apple developer console
 	npm install
 	npm run install
 ```
+
+then open
+
 Terminal1:
 ```
 	npm run up

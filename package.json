@@ -17,7 +17,8 @@
     "kill": "docker exec $(docker-compose ps -q web) pkill -f 'node /src/app/' || true",
     "killall": "docker rm -f $(docker-compose ps -q)",
     "install": "docker exec -it $(docker-compose ps -q web) npm install --prefix /src/app/",
-    "install-package": "docker exec -it $(docker-compose ps -q web) npm install --prefix /src/app/ --save"
+    "install-package": "docker exec -it $(docker-compose ps -q web) npm install --prefix /src/app/ --save",
+		"patch-release": "npm version patch && git push --follow-tags"
   },
   "author": "Manuel Villing <hi@manuelvilling.de>",
   "license": "MIT",

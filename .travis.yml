@@ -1,18 +1,7 @@
-env:
-  DOCKER_COMPOSE_VERSION: 1.6.0
-
-sudo: required
-
-services:
-  - docker
-
-before_install:
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin/
+sudo: false
 
 install:
-  - npm run install
+  - cd app && npm install
 
 script:
-  - npm test
+  - npm run test-local

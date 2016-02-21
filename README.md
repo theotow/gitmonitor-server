@@ -29,6 +29,24 @@ Terminal2:
 	npm run watch
 ```
 
+## install on digital ocean droplet
+
+1. run 'how to install' steps but skip the Terminal1, Terminal2 step
+
+2. create droplet and init shell
+
+```
+docker-machine create --driver digitalocean --digitalocean-access-token <your token here> docker-sandbox
+eval $(docker-machine env docker-sandbox)     
+
+```
+3. start the server
+```
+npm run up-prod-forever
+open http://$(docker-machine ip docker-sandbox):3000
+```
+4. set that ip in gitmonitor-ios && gitmonitor-client accordingly
+
 ## depends on
 
 * [gitmonitor-client](https://github.com/theotow/gitmonitor-client)
@@ -52,8 +70,10 @@ npm run *
 * watch-local / watch tests local
 * up / runs the dev build
 * up-prod / runs the production build
+* up-prod-forever / run forever on docker
 * build / build the dev build
 * build-prod / build the prod build
+
 
 
 Tested on Mac OSX 10.10.5 & node 4.2.2 & docker 1.10.0 & docker-compose 1.6.0

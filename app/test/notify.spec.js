@@ -72,6 +72,36 @@ describe('Notify', () => {
 		});
 	});
 
+	it('getNotifieables - repo not clean but pushed should be notified', function(done) {
+		commonP.createRepoAsync(_.extend(common.repoData, {
+			notified: false,
+			isClean: false,
+			status: {
+				ahead: 0
+			}
+		})).then(() => {}).delay(200).then(() => {
+			job.getNotifieables(new Date(), 100, (err, data) => {
+				expect(data.length).to.be(1);
+				done();
+			})
+		});
+	});
+
+	it('getNotifieables - repo clean but not pushed should be notified', function(done) {
+		commonP.createRepoAsync(_.extend(common.repoData, {
+			notified: false,
+			isClean: true,
+			status: {
+				ahead: 1
+			}
+		})).then(() => {}).delay(200).then(() => {
+			job.getNotifieables(new Date(), 100, (err, data) => {
+				expect(data.length).to.be(1);
+				done();
+			})
+		});
+	});
+
 	it('getInstallationOfRepo - list devices of repos (just one repo)', function(done) {
 
 		asyncWaterfall([

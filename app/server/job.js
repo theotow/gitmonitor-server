@@ -7,14 +7,16 @@ var moment = require('moment');
 // get repos which are not synced
 function getNotifieables(time, maxdiff, cb){
   models.Repo.find({ where: {
-      notified: false,
-      isClean: false
+      notified: false
   }}, function(err, data){
     if(err) return cb(err);
     var res = _.filter(data, function(item){
       return (
 				(moment(time).diff(item.updateTime) > maxdiff) && // reached time limit
-				(item.status.ahead > 0) // and not pushed to remote
+				(
+					(!item.isClean) || // did not commit
+					(item.status.ahead > 0) // and not pushed to remote
+				)
 			);
     });
     cb(null, res);

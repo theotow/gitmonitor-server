@@ -4,4 +4,4 @@ install:
   - cd app && npm install
 
 script:
-  - npm test-local
+  - npm run test-local

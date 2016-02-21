@@ -12,7 +12,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin/
 
 install:
-  - npm run install
+  - cd app && npm install
 
 script:
-  - npm test
+  - npm test-local

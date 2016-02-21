@@ -12,7 +12,10 @@ function getNotifieables(time, maxdiff, cb){
   }}, function(err, data){
     if(err) return cb(err);
     var res = _.filter(data, function(item){
-      return (moment(time).diff(item.updateTime) > maxdiff);
+      return (
+				(moment(time).diff(item.updateTime) > maxdiff) && // reached time limit
+				(item.status.ahead > 0) // and not pushed to remote
+			);
     });
     cb(null, res);
   });

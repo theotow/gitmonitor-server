@@ -2,91 +2,81 @@
 
 var job = require('../server/job');
 var models = require('../server/server').models;
+var Promise = require('bluebird');
+var commonP = Promise.promisifyAll(common);
+var asyncWaterfall = Promise.promisify(require('async').waterfall);
+
 
 describe('Notify', () => {
 	lt.beforeEach.withApp(app);
 
-	before((cb) => {
-		common.createRepo(common.repoData, () => {});
-		setTimeout(() => {
-			cb();
-		}, 100);
-	});
+	beforeEach((cb) => {
+		app.loopback.getModel('Repo').destroyAll({}, cb); // to make tests atomic
+	})
+
 	it('getNotifieables - repos create now or less then 5sec. are not notified', function(done) {
-		this.timeout(5000);
-		job.getNotifieables(new Date(), 5000, (err, data) => {
-			expect(data.length).to.be(0);
-			done();
-		})
+		commonP.createRepoAsync(common.repoData).then(() => {}).delay(100).then(() => {
+			job.getNotifieables(new Date(), 1000, (err, data) => {
+				expect(data.length).to.be(0);
+				done();
+			})
+		});
 	});
 
-	before((cb) => {
-		common.createRepo(_.extend(common.repoData, {
-			isClean: true
-		}), () => {});
-		setTimeout(() => {
-			cb();
-		}, 100);
-	});
 	it('getNotifieables - repos which are clean are fine', function(done) {
-		this.timeout(5000);
-		job.getNotifieables(new Date(), 5000, (err, data) => {
-			expect(data.length).to.be(0);
-			done();
-		})
+		commonP.createRepoAsync(_.extend(common.repoData, {
+			isClean: true
+		})).then(() => {}).delay(200).then(() => {
+			job.getNotifieables(new Date(), 100, (err, data) => {
+				expect(data.length).to.be(0);
+				done();
+			})
+		});
 	});
 
-	before((cb) => {
-		common.createRepo(_.extend(common.repoData, {
-			notified: true
-		}), () => {});
-		setTimeout(() => {
-			cb();
-		}, 100);
-	});
 	it('getNotifieables - repos which are notified are fine', function(done) {
-		this.timeout(5000);
-		job.getNotifieables(new Date(), 5000, (err, data) => {
-			expect(data.length).to.be(0);
-			done();
-		})
+		commonP.createRepoAsync(_.extend(common.repoData, {
+			notified: true
+		})).then(() => {}).delay(200).then(() => {
+			job.getNotifieables(new Date(), 100, (err, data) => {
+				expect(data.length).to.be(0);
+				done();
+			})
+		});
 	});
 
-	before((cb) => {
-		common.createRepo(_.extend(common.repoData, {
+	it('getNotifieables - repos which are notified + clean are fine', function(done) {
+		commonP.createRepoAsync(_.extend(common.repoData, {
 			notified: true,
 			isClean: true
-		}), () => {});
-		setTimeout(() => {
-			cb();
-		}, 100);
-	});
-	it('getNotifieables - repos which are notified + clean + in time are fine', function(done) {
-		this.timeout(5000);
-		job.getNotifieables(new Date(), 5000, (err, data) => {
-			expect(data.length).to.be(0);
-			done();
-		})
+		})).then(() => {}).delay(200).then(() => {
+			job.getNotifieables(new Date(), 100, (err, data) => {
+				expect(data.length).to.be(0);
+				done();
+			})
+		});
 	});
 
-	before((cb) => {
-		common.createRepo(common.repoData, () => {})
-		setTimeout(() => {
-			cb();
-		}, 1000);
-	});
 	it('getNotifieables - repos are out of time should be here', function(done) {
-		this.timeout(5000);
-		job.getNotifieables(new Date(), 800, (err, data) => {
-			expect(data.length).to.be.greaterThan(0);
-			done();
-		})
+		commonP.createRepoAsync(_.extend(common.repoData, {
+			notified: false,
+			isClean: false,
+			status: {
+				ahead: 1
+			}
+		})).then(() => {}).delay(200).then(() => {
+			job.getNotifieables(new Date(), 100, (err, data) => {
+				expect(data.length).to.be(1);
+				done();
+			})
+		});
 	});
 
-	before((cb) => {
-		async.waterfall([
+	it('getInstallationOfRepo - list devices of repos (just one repo)', function(done) {
+
+		asyncWaterfall([
       function(cb) {
-				common.createRepo(common.repoData, (err, data) => cb(err, data));
+				common.createRepo(common.repoData4, (err, data) => cb(err, data));
 			},
 			function(repo, cb) {
 				common.installDevice(common.device, (err, data) => cb(err, repo, data));
@@ -94,30 +84,23 @@ describe('Notify', () => {
       function(repo, device, cb) {
 				common.link(repo.res.body.id, device.res.body.id, (err, data) => cb(err, data));
 			}
-		], function(err, link) {
-			setTimeout(() => {
-				cb();
-			}, 100);
-		});
-	});
-	it('getInstallationOfRepo - list devices of repos (just one repo)', function(done) {
-		this.timeout(5000);
-
-		async.waterfall([
-      (cb) => {
-				job.getNotifieables(new Date(), 800, cb);
-			},
-			(repos, cb) => {
-				job.getInstallationOfRepo(repos, cb);
-			},
-		], (err, res) => {
+		]).then(() => {}).delay(200).then(() => {
+			return asyncWaterfall([
+	      (cb) => {
+					job.getNotifieables(new Date(), 100, cb);
+				},
+				(repos, cb) => {
+					job.getInstallationOfRepo(repos, cb);
+				},
+			]);
+		}).then((res) => {
 			expect(_.flatten(res).length).to.be(1);
 			done();
-		});
+		})
+
 	});
 
 	it('genNotification - gen a notification', function(done) {
-		this.timeout(5000);
 
 		var notification = job.genNotification({
 			name: 'test'
@@ -127,7 +110,9 @@ describe('Notify', () => {
 
 	});
 
-	before((cb) => {
+	it('sendNotification - should send a notification', function(done) {
+		this.timeout(5000);
+
 		async.waterfall([
 			function(cb) {
 				common.createRepo(common.repoData, (err, data) => cb(err, data));
@@ -136,29 +121,13 @@ describe('Notify', () => {
 				common.installDevice(common.device, (err, data) => cb(err, repo, data));
 			},
 			function(repo, device, cb) {
-				common.link(repo.res.body.id, device.res.body.id, (err, data) => cb(err, data));
+				common.link(repo.res.body.id, device.res.body.id, (err, data) => cb(err, repo, device));
 			}
-		], function(err, link) {
-			setTimeout(() => {
-				cb();
-			}, 100);
-		});
-	});
-	it('sendNotification - should send a notification', function(done) {
-		this.timeout(5000);
-
-		async.waterfall([
-			(cb) => {
-				job.getNotifieables(new Date(), 800, cb);
-			},
-			(repos, cb) => {
-				job.getInstallationOfRepo(repos, (err, data) => cb(err, data, repos));
-			},
-		], (err, devices, repos) => {
-			var device = _.flatten(devices)[0];
-			var repo = repos[0];
-			var notification = job.genNotification(repo);
-			job.sendNotification(device, notification, function(err, data){
+		], function(err, repo, device) {
+			var notification = job.genNotification(repo.res.body);
+			expect(notification).to.be.ok;
+			job.sendNotification(device.res.body, notification, function(err, data){
+				if(err) return done(err);
 				done();
 			});
 		});

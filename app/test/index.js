@@ -3,6 +3,7 @@
 process.env.NODE_ENV = 'test';
 global.expect = require('expect.js');
 global.request = require('supertest');
+global.Promise = require('bluebird');
 global.async = require('async');
 global._ = require('lodash');
 global.lt = require('loopback-testing');
@@ -92,6 +93,19 @@ global.common = {
         behind: 0
       }
     },
+		repoData4: {
+      branch: 'refs/heads/master',
+      name: 'testdir4',
+      author: 'Scott Chacon <schacon@gmail.com>',
+      message: 'test',
+      isClean: false,
+      notified: false,
+      branches: ['refs/heads/master'],
+      status: {
+        ahead: 1,
+        behind: 0
+      }
+    },
     repoData3: {
       branch: 'refs/heads/master',
       name: 'testdir5',
@@ -101,7 +115,7 @@ global.common = {
       notified: false,
       branches: ['refs/heads/master'],
       status: {
-        ahead: 0,
+        ahead: 1,
         behind: 0
       }
     },

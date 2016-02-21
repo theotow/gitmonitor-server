@@ -12,7 +12,7 @@ describe('Cronjob', () => {
 		app.loopback.getModel('Repo').remove({});
 		async.waterfall([
       function(cb) {
-				common.createRepos([common.repoData, common.repoData3], (err, data) => cb(err, data));
+				common.createRepos([common.repoData4, common.repoData3], (err, data) => cb(err, data));
 			},
 			function(repos, cb) {
 				common.installDevices([common.device, common.device2, common.device3], (err, data) => cb(err, repos, data));
@@ -46,8 +46,8 @@ describe('Cronjob', () => {
 
 		// queue full
 		q.drain = function() {
-			expect(results[0].repo.name).to.be(common.repoData.name);
-			expect(results[1].repo.name).to.be(common.repoData.name);
+			expect(results[0].repo.name).to.be(common.repoData4.name);
+			expect(results[1].repo.name).to.be(common.repoData4.name);
 
 			function match(val){
 				return (val === common.device.deviceToken || val == common.device2.deviceToken);

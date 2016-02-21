@@ -23,6 +23,9 @@ boot(app, __dirname, function(err) {
   if (err) throw err;
 
   require('./push')(app);
+	app.models.push.on('error', function(err) {
+  	console.error('Push Notification error: ', err.stack);
+	});
 
   // some static data for testing
   if(app.get('env') !== 'test'){

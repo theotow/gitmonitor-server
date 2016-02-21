@@ -50,7 +50,9 @@ function populate(time, maxtime, queue, cb){
 // kill
 function finish(){
   console.log('finished');
-  process.exit(0);
+	setTimeout(function(){
+		process.exit(0);
+	},60000) // hack to let all the messages send out
 }
 
 // process notifications

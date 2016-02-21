@@ -16,7 +16,7 @@ module.exports = function(app) {
         apns: {
           certData: config.apnsCertData,
           keyData: config.apnsKeyData,
-          // production: true, // if production
+          production: false, // if production
           feedbackOptions: {
             batchFeedback: true,
             interval: 60

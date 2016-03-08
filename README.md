@@ -1,3 +1,5 @@
+![logo](https://github.com/theotow/gitmonitor-server/raw/master/github/120x120.png "logo")
+
 # gitmonitor-server
 [![Build Status](https://travis-ci.org/theotow/gitmonitor-server.svg?branch=master)](https://travis-ci.org/theotow/gitmonitor-server)
 
@@ -5,7 +7,7 @@
 
 The purpose of this app is to remind you to push your code before you shut your macbook and go home, it may be that other people depend on it or your harddrive dies on the way home...
 
-PS: currently it just reports if your repo is not committed, if it is pushed is not checked
+![flow](https://github.com/theotow/gitmonitor-server/raw/master/github/flow.png "flow")
 
 ## how to install
 
